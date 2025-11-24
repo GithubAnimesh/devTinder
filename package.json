@@ -1,0 +1,22 @@
+{
+  "name": "devtinderbackend",
+  "version": "1.0.0",
+  "description": "Tinder for dev",
+  "keywords": [
+    "nodejs",
+    "react",
+    "js",
+    "mongoDB"
+  ],
+  "license": "ISC",
+  "author": "Animesh Sinngh",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
