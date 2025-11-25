@@ -4,8 +4,12 @@ const app = express(); // create new appliction of express.
 
 // handle code, this is called request handler
 
-app.use((req, res) => {
-  res.send("Hello from server");
+app.get("/user", (req, res) => {
+  res.send({ name: "Animesh", lastName: "Sinngh" });
+});
+
+app.post("/user", (req, res) => {
+  res.send("Date save successfully");
 });
 
 app.listen(3000, () => {
