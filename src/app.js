@@ -1,31 +1,32 @@
 const express = require("express");
-
+const connectDB = require("./config/database");
 const app = express(); // create new appliction of express.
 
-// handle code, this is called request handler
+const User = require("./models/user");
 
-// app.get("/user", (req, res) => {
-//   res.send({ name: "Animesh", lastName: "Sinngh" });
-// });
-
-// app.post("/user", (req, res) => {
-//   res.send("Date save successfully");
-// });
-
-app.get("/getUserData", (req, res) => {
+app.post("/signup", async (req, res) => {
+  const userObj = {
+    firstName: "Ankita",
+    lastName: "Sinngh",
+    emailId: "ankitavns@gmail.com",
+    password: "Thakuri@1",
+  };
+  const user = new User(userObj); // creating a new instance of the user model
   try {
-    throw new Error("dfsdbf");
-    res.send("User data send");
-  } catch (err) {
-    res.status(500).send(`Something went wrong, ${err.message}`);
-  }
-});
-app.use("/", (err, req, res, next) => {
-  if (err) {
-    res.status(500).send("Something went wrong user ");
+    await user.save();
+    res.send("User added successfully.....");
+  } catch (error) {
+    res.status(400).send(`We found issue to same data ${error.message}`);
   }
 });
 
-app.listen(3000, () => {
-  console.log("Animesh Sinngh server running on 3000");
-}); // web server created and other can see in 3000 port
+connectDB()
+  .then(() => {
+    console.log("Data base connected successful");
+    app.listen(5050, () => {
+      console.log("Animesh Sinngh server running on 5050");
+    });
+  })
+  .catch((err) => {
+    console.error(`Not able to connect ${err.message}`);
+  });
