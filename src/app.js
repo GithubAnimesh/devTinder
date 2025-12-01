@@ -4,14 +4,11 @@ const app = express(); // create new appliction of express.
 
 const User = require("./models/user");
 
+app.use(express.json()); // this will work on every route, this help to conver json to js object.
+
 app.post("/signup", async (req, res) => {
-  const userObj = {
-    firstName: "Ankita",
-    lastName: "Sinngh",
-    emailId: "ankitavns@gmail.com",
-    password: "Thakuri@1",
-  };
-  const user = new User(userObj); // creating a new instance of the user model
+  console.log(req.body);
+  const user = new User(req.body); // creating a new instance of the user model
   try {
     await user.save();
     res.send("User added successfully.....");
