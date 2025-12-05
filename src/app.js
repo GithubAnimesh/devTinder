@@ -7,7 +7,6 @@ const User = require("./models/user");
 app.use(express.json()); // this will work on every route, this help to conver json to js object.
 
 app.post("/signup", async (req, res) => {
-  console.log(req.body);
   const user = new User(req.body); // creating a new instance of the user model
   try {
     await user.save();
@@ -39,6 +38,35 @@ app.get("/feed", async (req, res) => {
     res.send(user);
   } catch (err) {
     res.status(400).send("Something went wrong");
+  }
+});
+
+// Delete API
+
+app.delete("/user", async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const DelUser = await User.findByIdAndDelete(userId);
+    res.send("User deleted successfully");
+  } catch (err) {
+    res.status(400).send("Something went wrong");
+  }
+});
+
+// Update user data
+
+app.patch("/user", async (req, res) => {
+  try {
+    const data = req.body;
+    const userId = req.body._id;
+    await User.findByIdAndUpdate(
+      { _id: userId },
+      data,
+      (returnDocument = "before")
+    ); // data is here updated fileds userId is field which have to update.
+    res.send("User data has been updated");
+  } catch (err) {
+    res.status(400).send("Somthing went wrong!");
   }
 });
 
