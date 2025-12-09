@@ -62,7 +62,7 @@ app.patch("/user", async (req, res) => {
     await User.findByIdAndUpdate(
       { _id: userId },
       data,
-      (returnDocument = "before")
+      (returnDocument = "after")
     ); // data is here updated fileds userId is field which have to update.
     res.send("User data has been updated");
   } catch (err) {
