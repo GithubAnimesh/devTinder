@@ -24,3 +24,5 @@
 - GET /user/connections
 - GET /user/requests/received
 - GET /user/feed - gets you the profile of other users on plateform
+
+Status: ignore, intersted, accepeted, rejectd

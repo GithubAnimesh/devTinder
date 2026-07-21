@@ -19,7 +19,13 @@ const userSchema = new mongoose.Schema(
     },
     password: { type: String, required: true },
     age: { type: Number },
-    gender: { type: String },
+    gender: {
+      type: String,
+      enum: {
+        values: ["Male", "Female", "Other"],
+        message: `{VALUE} is not a valid gender`,
+      },
+    },
     about: { type: String },
     skills: {
       type: [String],
